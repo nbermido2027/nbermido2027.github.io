@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>InnoVista Academy</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="navbar.css">
+  <style>
+   body {
+    color: #1a1917;
+    background-color: #a72326;
+    font-family: bahnschrift;
+    text-align: center;
+    margin-top: 100px;
+   } h1#subtitle {
+    font-size: 3rem;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    text-align: center;
+   } div#content {
+    display: inline-block;
+    margin-top: 0;
+    color: #ffffff;
+    background-color: #1a1917;
+    border-radius: 25px;
+    padding: 25px 25px 100px 25px;
+    position: relative;
+    margin-bottom: 20px;
+    width: 40%;
+   } img#cover {
+    width: 300px;
+    border-radius: 5px;
+    margin-right: 25px;
+   } p#indicator {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 50px;
+   }h1#title {
+    font-size: 3rem;
+    margin-bottom: 0;
+   } #data {
+    color: #ffffff;
+    text-align: left;
+   } button#controls {
+    border: 5px solid #1a1917;
+    border-radius: 20px;
+    background-color: #656565;
+    color: white;
+    padding: 15px 40px 15px 40px;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+   } h2#author {
+    font-style: italic;
+   } @media (max-width: 1000px) {
+    h1#title {
+     font-size: 3rem;
+    } div#content {
+     width: 80%;
+     margin-bottom: 20px;
+    } h1#subtitle {
+     font-size: 3rem;
+    } p#text {
+     font-size: 1rem;
+    } #data {
+     width: 90%;
+    } img#cover {
+     margin-right: 0;
+    } div#data {
+     display: inline-block;
+     position: relative;
+     top: 0;
+    } button#controls {
+     left: 50%;
+     bottom: -30px;
+    }
+   } 
+  </style>
+ </head>
+ <body>
+  <h1 id="title">Dance with Love's Faith</h1>
+  <div id="content">
+   <div id="data">
+     <h1 id="subtitle">To Love Inevitably</h1>
+     <p id="indicator">Shakespearean Sonnet</p>
+     <h2 id="author">Francis Adrian Adarna</h2>
+     <p id="text">
+      Jade of any kind can never be a beautiful as you<br>A modest, and vaguely transparent heart that you've shaped<br>I will wait forever, no matter how long the queue<br>Lenient personification of an angel that you've made to gape<br>Appease in us comes and goes like a ripple<br>Love lacks as though peace lasts eternity<br>I, mediocre at best, is destined to make everything cripple<br>Naived demon like me ever since, has turned a new leaf internally<br>Naked thought of infatuation we thought was nothing<br>Elixir-like words was the only thing that kept us together<br>At a point where to commit is the best thing to cling<br>I pray that you are and will always be mine, oh, Aether<br>To neglect, or to commit, you cherish the beauty of light<br>Is to move like a wave that always comes back to an eternity of bright <audio controls><source src='imgs/New recording 92.m4a' type='audio/mp4'>Your browser does not support the audio element.</audio>
+     </p>
+   </div>
+   <button id="controls">Prev | Next</button>
+  </div>
+  
+  <div id="navbar">
+   <div class="link">
+    <a href="index.html" class="navi">HOME</a>
+    <a href="contact.html" class="navi">CONTACT US</a>
+    <a href="about.html" class="navi">ABOUT US</a>
+    <a href="clubs.html" class="navi">CLUBS</a>
+    <a href="biology.html" class="navi">BIOLOGY</a>
+   </div>
+   <h1 id="location">You are at English</h1>
+  </div>
+  <script>
+   var index = 0;
+   
+   var content = [
+   "Jade of any kind can never be a beautiful as you<br>A modest, and vaguely transparent heart that you've shaped<br>I will wait forever, no matter how long the queue<br>Lenient personification of an angel that you've made to gape<br>Appease in us comes and goes like a ripple<br>Love lacks as though peace lasts eternity<br>I, mediocre at best, is destined to make everything cripple<br>Naived demon like me ever since, has turned a new leaf internally<br>Naked thought of infatuation we thought was nothing<br>Elixir-like words was the only thing that kept us together<br>At a point where to commit is the best thing to cling<br>I pray that you are and will always be mine, oh, Aether<br>To neglect, or to commit, you cherish the beauty of light<br>Is to move like a wave that always comes back to an eternity of bright",
+   
+   "Forgive me, for the kindness I failed to return.<br>Know I care for you, whichever way the wind blows.<br>Pristine, you are a beauty akin to Saturn.<br>I'll always catch you, and hold you ever so close<br>Engulfed in mystery, the far distant horizon,<br>Cast into shadow by raw beauty and mystique.<br>A storm is brewing, though seen by none.<br>Destiny is a fickle friend or so to speak.<br>Drawn to the soft warmth of your hand,<br>As if a young moth and a flame.<br>Though pride is not of reason's command<br>Is this really something for airy declaim?<br>Whispers of emotion is not something to fear.<br>I’m right here with you, hopeful and near.",
+   
+   "In life's simplicity, uncertainty resides.<br>Leave its dangerous shadow in the cover of darkness,<br>Open your wings and fly even if the sky declines.<br>maybe being free is the answer for all this mess.<br>Speak, does your heart answer my affection's plea,<br>Or does it stray, untouched, unbound and still at liberty?<br>Are your words sincere or just a rain crashing with the waves in the sea?<br>But I’ll stay as long as you give me validity.<br>Those painted fake smiles, and those tears that’s disguised as precious milk.<br>Pain blooms within, and tears down everything.<br>I wish I could just forget all with a single click.<br>But I’ll take my time with these bad memories I’m burying.<br>If fate decided we're not meant to align,<br>I am ready, to erase your trace from mine.",
+   
+   "As I sway my soul to be acquainted with the starry world<br>I latched with reality realizing that you were an epiphany<br>The mellifluous voice of yours travels like Apollo’s lyre’s polyphony<br>Only in your eyes I see a glimpse where I forever wish to be furled<br>Every picturesque of our echoes has impearled<br>In a threshold where our dearing words serve as symphony<br>That I wish to keep, if not, I’d put myself in a tyranny<br>Loving you was everything I had that I can never uncurl<br>Peeking into the future where I’ll once be paradoxically demure<br>An ephemeral felicity was never really genuine<br>I loved you, I really do; my euphoria just turned to detour<br>Against the risk I once took with blasting adrenaline<br>My heart longs to another of which I’m unsure<br>Yet, still hoping for a glimpse, this time genuine",
+   
+   "Trembling heart, I failed to usher<br>As your image graces my sight,<br>The one I dream of every night.<br>To heaven, ever so closer,<br>As our time comes soon and sooner.<br>If not just now, why not last night?<br>Dream’t my heart had the gift of flight,<br>for a moment, before it was over.<br>My soul, my mind can't hope to rest,<br>As if grief isn't an old friend.<br>Whispers from a past I can't forget<br>I hope this night will never end.<br>As time keeps its cards close to chest,<br>Will it truly be forever etched?",
+   
+   "In mine’s feeling depth, doth my heart a fortune seek?<br>I can’t let a farewell to the pains you’ve sown.<br>Their clutch persists, though I contend to disown.<br>The thought of you lingers long, and in my mind’s like a leak.<br>If I ask the wind, would the cosmos speak?<br>I am lost in bewilderment, far from the throne.<br>In your heart would I ever get a crown?<br>Forgotten, from your memory's highest peak.<br>Reality dawns, revealing the true chime.<br>You're not mine; yet, you echo every time I am thinking.<br>Now content I stand, despite you not being mine.<br>Now yearning for your rejection feels like a quiet crime.<br>Finding joy, despite the sun's setting.<br>Thinking about the future sky, I know I am going to be fine."
+   ];
+   
+   var titles = [
+    "To Love Inevitably",
+    "Wherever the wind blows",
+    "Video Tape",
+    "My Dear Eudaimonia",
+    "Fleeting Love",
+    "Uncertain Love’s Fortune"
+   ];
+   
+   var authors = ["Francis Adrian Adarna", "Nicolas Joaquin Bermido", "Lyle Joy Ortiz"];
+   
+   var data = document.getElementById("text");
+   var author = document.getElementById("author");
+   var pname = document.getElementById("subtitle");
+   var indicator = document.getElementById("indicator");
+   
+   var button = document.getElementById("controls");
+   
+   button.addEventListener("click", (event) => {
+    let rect = button.getBoundingClientRect();
+    if (event.clientX - rect["x"] > rect["width"] / 2) {
+     // Next
+     index += 1;
+    } else {
+     // Prev
+     index += 6 - 1;
+    }
+    
+    index = index % 6;
+    
+    // Title
+    pname.textContent = titles[index];
+    // Indicator
+    if (index + 1 > 3) {
+     indicator.textContent = "Petrarchan Sonnet";
+    } else {
+     indicator.textContent = "Shakespearean Sonnet";
+    }
+    
+    // Author
+    author.textContent = authors[index % 3];
+    
+    // Content
+    data.innerHTML = content[index];
+    
+    if (index == 0) {
+     data.innerHTML += "<audio controls><source src='imgs/New recording 92.m4a' type='audio/mp4'>Your browser does not support the audio element.</audio>"
+    }
+   });
+  </script>
+ </body>
+</html>
