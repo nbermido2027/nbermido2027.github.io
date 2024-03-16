@@ -15,7 +15,6 @@
         body {
             overflow: hidden;
             font-family: bahnschrift;
-            cursor: none;
             text-align: center;
             background-image: url("resources/grid.jpeg");
             background-position: center 0px;
@@ -26,6 +25,7 @@
             width: 10%;
             transition: transform 0.1s, opacity 1s;
             position: absolute;
+            cursor: none;
             opacity: 0;
         } div#bullets img {
             position: absolute;
@@ -34,7 +34,20 @@
             position: absolute;
             width: 5%;
         } h1#ui {
-            text-align: center;
+            z-index: 1;
+            transition: font-size 1s, margin-top 1s;
+            margin-bottom: 0;
+            margin-top: 0;
+            z-index: 1;
+        } button {
+            transition: opacity 1s;
+            margin-top: 0;
+            padding: 10px;
+            background-color: white;
+            font-size: 2rem;
+            opacity: 0;
+            border-radius: 10px;
+            z-index: 1;
         }
     </style>
 </head>
@@ -47,6 +60,7 @@
     <div id="effects"></div>
     
     <h1 id="ui">SCORE: 0</h1>
+    <button id="restart">REPLAY</button>
     
     <script>
         var player = document.getElementById("player");
@@ -56,6 +70,7 @@
         var score = 0;
 
         document.addEventListener("mousemove", event => {
+            player.style.opacity = 1;
             if (alive) {
              player.style.top = `${event.pageY}px`;
              player.style.left = `${event.pageX}px`;
@@ -66,15 +81,17 @@
              player.style.transform = `translate(-50%, -50%) rotate(${movement}deg)`;
              
              position = [event.pageX, event.pageY];
- 
-             player.style.opacity = 1;
             }
         });
 
         document.addEventListener("click", event => {
-            if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && alive) {
+            if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && alive && Math.pow(event.pageX - position[0], 2) + Math.pow(event.pageY - position[1], 2) < 8000) {
                 document.getElementById("bullets").innerHTML += `<img src='resources/missile.png' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
             }
+        });
+        
+        document.addEventListener("mouseout", event => {
+            player.style.opacity = 0;
         });
         
         function run() {
@@ -112,9 +129,12 @@
              // Meteor has made contact with player
              if (Math.pow(position[0] - rect.left - rect.width / 2, 2) + Math.pow(position[1] - rect.bottom + rect.width / 2, 2) < 8000) {
               // Game over
-              alert("GAME OVER");
               document.body.style.webkitAnimationPlayState = 'paused';
               alive = false;
+              
+              document.getElementById("ui").style.fontSize = "5rem";
+              document.getElementById("ui").style.marginTop = "50px";
+              document.getElementById("restart").style.opacity = 1;
              }
              
              // Meteor has made contact with bullet
@@ -146,6 +166,21 @@
         }
         
         window.onload = run;
+        
+        document.getElementById("restart").addEventListener("click", event => {
+            if (alive) return;
+            
+            score = 0;
+            alive = true;
+            document.body.style.webkitAnimationPlayState = 'running';
+            document.getElementById("ui").style.fontSize = "2rem";
+            document.getElementById("ui").style.marginTop = "0px";
+            document.getElementById("meteors").innerHTML = "";
+            document.getElementById("bullets").innerHTML = "";
+            document.getElementById("effects").innerHTML = "";
+            document.getElementById("restart").style.opacity = 0;
+            window.requestAnimationFrame(run);
+        });
     </script>
 </body>
 </html>
