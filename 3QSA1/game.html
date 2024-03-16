@@ -6,9 +6,9 @@
     <title>Asteroids</title>
     <style>
         @keyframes slide {
-         from {
+         0% {
           background-position: center 0px;
-         } to {
+         } 100% {
           background-position: center 360px;
          }
         }
@@ -72,7 +72,7 @@
         });
 
         document.addEventListener("click", event => {
-            if (document.querySelectorAll("div#bullets img").length < 3 && alive) {
+            if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && alive) {
                 document.getElementById("bullets").innerHTML += `<img src='resources/missile.png' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
             }
         });
