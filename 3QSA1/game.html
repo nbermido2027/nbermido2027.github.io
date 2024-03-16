@@ -5,11 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asteroids</title>
     <style>
+        @keyframes slide {
+         from {
+          background-position: center 0px;
+         } to {
+          background-position: center 360px;
+         }
+        }
         body {
             overflow: hidden;
             font-family: bahnschrift;
             cursor: none;
             text-align: center;
+            background-image: url("resources/grid.jpeg");
+            background-position: center 0px;
+            animation: 3s linear 0s slide infinite;
         } img {
             user-select: none;
         } img#player {
@@ -103,6 +113,7 @@
              if (Math.pow(position[0] - rect.left - rect.width / 2, 2) + Math.pow(position[1] - rect.bottom + rect.width / 2, 2) < 8000) {
               // Game over
               alert("GAME OVER");
+              document.body.style.webkitAnimationPlayState = 'paused';
               alive = false;
              }
              
