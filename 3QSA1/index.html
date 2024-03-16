@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroids</title>
+    <style>
+        body {
+            overflow: hidden;
+            font-family: bahnschrift;
+            cursor: none;
+            text-align: center;
+        } img {
+            user-select: none;
+        } img#player {
+            width: 10%;
+            transition: transform 0.1s, opacity 1s;
+            position: absolute;
+            opacity: 0;
+        } div#bullets img {
+            position: absolute;
+            width: 2.5%;
+        } div#meteors img {
+            position: absolute;
+            width: 5%;
+        } h1#ui {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="bullets"></div>
+    <div id="meteors"></div>
+    
+    <img src="resources/ship.png" id="player" draggable="false">
+    
+    <div id="effects"></div>
+    
+    <h1 id="ui">SCORE: 0</h1>
+    
+    <script>
+        var player = document.getElementById("player");
+        var position = [0, 0], movement;
+        var alive = true;
+        
+        var score = 0;
+
+        document.addEventListener("mousemove", event => {
+            if (alive) {
+             player.style.top = `${event.pageY}px`;
+             player.style.left = `${event.pageX}px`;
+ 
+             movement = event.pageX - position[0];
+             if (movement > 90) movement = 90;
+             else if (movement < -90) movement = -90;
+             player.style.transform = `translate(-50%, -50%) rotate(${movement}deg)`;
+             
+             position = [event.pageX, event.pageY];
+ 
+             player.style.opacity = 1;
+            }
+        });
+
+        document.addEventListener("click", event => {
+            if (document.querySelectorAll("div#bullets img").length < 3 && alive) {
+                document.getElementById("bullets").innerHTML += `<img src='resources/missile.png' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
+            }
+        });
+        
+        function run() {
+            score += 0.1;
+            document.getElementById("ui").textContent = `SCORE: ${Math.round(score)}`;
+            
+            document.querySelectorAll("div#bullets img").forEach(bullet => {
+             let angle = parseFloat(bullet.style.transform.slice(29, -4));
+             bullet.style.top = `${parseFloat(bullet.style.top.slice(0, -2)) - 20 * Math.sin((angle + 90) / 180 * Math.PI)}px`;
+             bullet.style.left = `${parseFloat(bullet.style.left.slice(0, -2)) - 20 * Math.cos((angle + 90) / 180 * Math.PI)}px`;
+             
+             let rect = bullet.getBoundingClientRect();
+             
+             if (rect.bottom < 0 || rect.right < 0 || rect.left > 1920) {
+              bullet.parentElement.removeChild(bullet);
+             }
+            });
+            
+            document.querySelectorAll("div#effects img").forEach(effect => {
+             let opacity = parseFloat(effect.style.opacity);
+             opacity -= 0.04;
+             if (opacity <= 0) effect.parentElement.removeChild(effect);
+             effect.style.opacity = opacity;
+            });
+             
+            document.querySelectorAll("div#meteors img").forEach(meteor => {
+             meteor.style.top = `${parseFloat(meteor.style.top.slice(0, -2)) + 20}px`;
+             
+             if (parseFloat(meteor.style.top.slice(0, -2)) > 1080) {
+              meteor.parentElement.removeChild(meteor);
+             }
+             
+             let rect = meteor.getBoundingClientRect();
+             
+             // Meteor has made contact with player
+             if (Math.pow(position[0] - rect.left - rect.width / 2, 2) + Math.pow(position[1] - rect.bottom + rect.width / 2, 2) < 8000) {
+              // Game over
+              alert("GAME OVER");
+              alive = false;
+             }
+             
+             // Meteor has made contact with bullet
+             document.querySelectorAll("div#bullets img").forEach(bullet => {
+              let brect = bullet.getBoundingClientRect();
+              
+              if (Math.pow((rect.left + rect.width / 2) - (brect.left + brect.width / 2), 2) + Math.pow((rect.top + rect.height / 2) - (brect.top + brect.height / 2), 2) < 8000) {
+               score += 50;
+               
+               // Destroy bullet & meteor
+               bullet.parentElement.removeChild(bullet);
+               meteor.parentElement.removeChild(meteor);
+               
+               // Explosion
+               document.getElementById("effects").innerHTML += `<img src='resources/boom.png' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
+              }
+              
+              
+             });
+            });
+            
+            if (Math.random() < score / 5000 && document.querySelectorAll("div#meteors img").length < 20) {
+             document.getElementById("meteors").innerHTML += `<img src='resources/meteor.png' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
+            }
+            
+            if (alive) {
+             window.requestAnimationFrame(run);
+            }
+        }
+        
+        window.onload = run;
+    </script>
+</body>
+</html>
