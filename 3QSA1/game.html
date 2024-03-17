@@ -6,11 +6,11 @@
     <title>Asteroids</title>
     <style>
         @keyframes slide {
-         0% {
-          background-position: center 0px;
-         } 100% {
-          background-position: center 240px;
-         }
+            0% {
+                background-position: center 0px;
+            } 100% {
+                background-position: center 240px;
+            }
         }
         
         body {
@@ -88,15 +88,15 @@
         document.addEventListener("mousemove", event => {
             player.style.opacity = 1;
             if (alive) {
-             player.style.top = `${event.pageY}px`;
-             player.style.left = `${event.pageX}px`;
+                player.style.top = `${event.pageY}px`;
+                player.style.left = `${event.pageX}px`;
  
-             movement = event.pageX - position[0];
-             if (movement > 90) movement = 90;
-             else if (movement < -90) movement = -90;
-             player.style.transform = `translate(-50%, -50%) rotate(${movement}deg)`;
+                movement = event.pageX - position[0];
+                if (movement > 90) movement = 90;
+                else if (movement < -90) movement = -90;
+                player.style.transform = `translate(-50%, -50%) rotate(${movement}deg)`;
              
-             position = [event.pageX, event.pageY];
+                position = [event.pageX, event.pageY];
             }
         });
 
@@ -115,88 +115,88 @@
             document.getElementById("ui").textContent = `SCORE: ${Math.round(score)}`;
             
             document.querySelectorAll("div#bullets img").forEach(bullet => {
-             let angle = parseFloat(bullet.style.transform.slice(29, -4));
-             bullet.style.top = `${parseFloat(bullet.style.top.slice(0, -2)) - 20 * Math.sin((angle + 90) / 180 * Math.PI)}px`;
-             bullet.style.left = `${parseFloat(bullet.style.left.slice(0, -2)) - 20 * Math.cos((angle + 90) / 180 * Math.PI)}px`;
+                let angle = parseFloat(bullet.style.transform.slice(29, -4));
+                bullet.style.top = `${parseFloat(bullet.style.top.slice(0, -2)) - 20 * Math.sin((angle + 90) / 180 * Math.PI)}px`;
+                bullet.style.left = `${parseFloat(bullet.style.left.slice(0, -2)) - 20 * Math.cos((angle + 90) / 180 * Math.PI)}px`;
+                
+                let rect = bullet.getBoundingClientRect();
              
-             let rect = bullet.getBoundingClientRect();
-             
-             if (rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth) {
-              bullet.parentElement.removeChild(bullet);
-             }
+                if (rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth) {
+                 bullet.parentElement.removeChild(bullet);
+                }
             });
             
             document.querySelectorAll("div#effects img").forEach(effect => {
-             let opacity = parseFloat(effect.style.opacity);
-             opacity -= 0.04;
-             if (opacity <= 0) effect.parentElement.removeChild(effect);
-             effect.style.opacity = opacity;
+                let opacity = parseFloat(effect.style.opacity);
+                opacity -= 0.04;
+                if (opacity <= 0) effect.parentElement.removeChild(effect);
+                effect.style.opacity = opacity;
             });
-             
+            
             document.querySelectorAll("div#meteors img").forEach(meteor => {
-             meteor.style.top = `${parseFloat(meteor.style.top.slice(0, -2)) + 20}px`;
+                meteor.style.top = `${parseFloat(meteor.style.top.slice(0, -2)) + 20}px`;
              
-             if (parseFloat(meteor.style.top.slice(0, -2)) > window.innerHeight) {
-              meteor.parentElement.removeChild(meteor);
-             }
+                if (parseFloat(meteor.style.top.slice(0, -2)) > window.innerHeight) {
+                    meteor.parentElement.removeChild(meteor);
+                }
              
-             let rect = meteor.getBoundingClientRect();
+                let rect = meteor.getBoundingClientRect();
              
-             // Meteor has made contact with bullet
-             document.querySelectorAll("div#bullets img").forEach(bullet => {
-              let brect = bullet.getBoundingClientRect();
+                 // Meteor has made contact with bullet
+                document.querySelectorAll("div#bullets img").forEach(bullet => {
+                    let brect = bullet.getBoundingClientRect();
               
-              if (Math.pow((rect.left + rect.width / 2) - (brect.left + brect.width / 2), 2) + Math.pow((rect.top + rect.height / 2) - (brect.top + brect.height / 2), 2) < 8000) {
-               score += 50;
+                    if (Math.pow((rect.left + rect.width / 2) - (brect.left + brect.width / 2), 2) + Math.pow((rect.top + rect.height / 2) - (brect.top + brect.height / 2), 2) < 8000) {
+                     score += 50;
                
-               // Destroy bullet & meteor
-               bullet.parentElement.removeChild(bullet);
-               meteor.parentElement.removeChild(meteor);
-               
-               // Explosion
-               document.getElementById("effects").innerHTML += `<img alt='Explosion' src='resources/boom.svg' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
-              }
-             });
+                    // Destroy bullet & meteor
+                    bullet.parentElement.removeChild(bullet);
+                    meteor.parentElement.removeChild(meteor); 
+                  
+                    // Explosion
+                    document.getElementById("effects").innerHTML += `<img alt='Explosion' src='resources/boom.svg' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
+                    
+                    }
+                });
              
-             // Meteor has made contact with player
-             if (Math.pow(position[0] - rect.left - rect.width / 2, 2) + Math.pow(position[1] - rect.bottom + rect.width / 2, 2) < 8000) {
-              // Game over
-              document.body.style.webkitAnimationPlayState = 'paused';
-              alive = false;
+                // Meteor has made contact with player
+                if (Math.pow(position[0] - rect.left - rect.width / 2, 2) + Math.pow(position[1] - rect.bottom + rect.width / 2, 2) < 8000) {
+                    // Game over
+                    alive = false;
               
-              document.getElementById("ui").style.fontSize = "5rem";
-              document.getElementById("ui").style.marginTop = "50px";
-              document.getElementById("restart").style.opacity = 1;
-             }
-             
+                    document.body.style.webkitAnimationPlayState = 'paused';
+                    document.getElementById("ui").style.fontSize = "5rem";
+                    document.getElementById("ui").style.marginTop = "50px";
+                    document.getElementById("restart").style.opacity = 1;
+                }
             });
             
             if (Math.random() < score / 5000 && document.querySelectorAll("div#meteors img").length < 20) {
-             document.getElementById("meteors").innerHTML += `<img alt='Meteor' src='resources/meteor.svg' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
+                document.getElementById("meteors").innerHTML += `<img alt='Meteor' src='resources/meteor.svg' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
             }
             
             if (alive) {
-             window.requestAnimationFrame(run);
+                window.requestAnimationFrame(run);
             }
         }
         
-        window.onload = run;
-        
         document.getElementById("restart").addEventListener("click", event => {
-            if (alive) return;
+            if (alive == false) {
+                score = 0;
+                alive = true;
             
-            score = 0;
-            alive = true;
-            
-            document.body.style.webkitAnimationPlayState = 'running';
-            document.getElementById("ui").style.fontSize = "2rem";
-            document.getElementById("ui").style.marginTop = "0px";
-            document.getElementById("meteors").innerHTML = "";
-            document.getElementById("bullets").innerHTML = "";
-            document.getElementById("effects").innerHTML = "";
-            document.getElementById("restart").style.opacity = 0;
-            window.requestAnimationFrame(run);
+                document.body.style.webkitAnimationPlayState = 'running';
+                document.getElementById("ui").style.fontSize = "2rem";
+                document.getElementById("ui").style.marginTop = "0px";
+                document.getElementById("meteors").innerHTML = "";
+                document.getElementById("bullets").innerHTML = "";
+                document.getElementById("effects").innerHTML = "";
+                document.getElementById("restart").style.opacity = 0;
+                window.requestAnimationFrame(run);
+            }
         });
+        
+        window.onload = run;
     </script>
 </body>
 </html>
