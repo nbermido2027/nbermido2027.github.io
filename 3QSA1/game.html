@@ -71,7 +71,7 @@
     <div id="bullets"></div>
     <div id="meteors"></div>
     
-    <img src="resources/ship.png" id="player" draggable="false">
+    <img alt="Spaceship" src="resources/ship.png" id="player" draggable="false">
     
     <div id="effects"></div>
     
@@ -102,7 +102,7 @@
 
         document.addEventListener("click", event => {
             if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && alive && Math.pow(event.pageX - position[0], 2) + Math.pow(event.pageY - position[1], 2) < 8000) {
-                document.getElementById("bullets").innerHTML += `<img src='resources/rocket.svg' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
+                document.getElementById("bullets").innerHTML += `<img alt='Missile' src='resources/rocket.svg' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
             }
         });
         
@@ -154,7 +154,7 @@
                meteor.parentElement.removeChild(meteor);
                
                // Explosion
-               document.getElementById("effects").innerHTML += `<img src='resources/boom.svg' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
+               document.getElementById("effects").innerHTML += `<img alt='Explosion' src='resources/boom.svg' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
               }
              });
              
@@ -172,7 +172,7 @@
             });
             
             if (Math.random() < score / 5000 && document.querySelectorAll("div#meteors img").length < 20) {
-             document.getElementById("meteors").innerHTML += `<img src='resources/meteor.svg' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
+             document.getElementById("meteors").innerHTML += `<img alt='Meteor" src='resources/meteor.svg' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
             }
             
             if (alive) {
