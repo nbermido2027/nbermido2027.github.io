@@ -9,16 +9,17 @@
          0% {
           background-position: center 0px;
          } 100% {
-          background-position: center 360px;
+          background-position: center 240px;
          }
         }
+        
         body {
             overflow: hidden;
             font-family: bahnschrift;
             text-align: center;
-            background-image: url("resources/grid.jpeg");
+            background-image: url("resources/grid.svg");
             background-position: center 0px;
-            animation: 3s linear 0s slide infinite;
+            animation: 2s linear 0s slide infinite;
         } img {
             user-select: none;
         } img#player {
@@ -29,10 +30,12 @@
             opacity: 0;
         } div#bullets img {
             position: absolute;
+            z-index: 0;
             width: 2.5%;
         } div#meteors img {
             position: absolute;
             width: 5%;
+            z-index: 0;
         } h1#ui {
             z-index: 1;
             transition: font-size 1s, margin-top 1s;
@@ -47,7 +50,10 @@
             font-size: 2rem;
             opacity: 0;
             border-radius: 10px;
+            border: solid 4px black;
             z-index: 1;
+        } button:active {
+            background-color: #ececec;
         } @media only screen and (max-width: 600px) {
             img#player {
                 width: 30%;
@@ -96,7 +102,7 @@
 
         document.addEventListener("click", event => {
             if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && alive && Math.pow(event.pageX - position[0], 2) + Math.pow(event.pageY - position[1], 2) < 8000) {
-                document.getElementById("bullets").innerHTML += `<img src='resources/missile.png' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
+                document.getElementById("bullets").innerHTML += `<img src='resources/rocket.svg' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
             }
         });
         
@@ -115,7 +121,7 @@
              
              let rect = bullet.getBoundingClientRect();
              
-             if (rect.bottom < 0 || rect.right < 0 || rect.left > 1920) {
+             if (rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth) {
               bullet.parentElement.removeChild(bullet);
              }
             });
@@ -130,22 +136,11 @@
             document.querySelectorAll("div#meteors img").forEach(meteor => {
              meteor.style.top = `${parseFloat(meteor.style.top.slice(0, -2)) + 20}px`;
              
-             if (parseFloat(meteor.style.top.slice(0, -2)) > 1080) {
+             if (parseFloat(meteor.style.top.slice(0, -2)) > window.innerHeight) {
               meteor.parentElement.removeChild(meteor);
              }
              
              let rect = meteor.getBoundingClientRect();
-             
-             // Meteor has made contact with player
-             if (Math.pow(position[0] - rect.left - rect.width / 2, 2) + Math.pow(position[1] - rect.bottom + rect.width / 2, 2) < 8000) {
-              // Game over
-              document.body.style.webkitAnimationPlayState = 'paused';
-              alive = false;
-              
-              document.getElementById("ui").style.fontSize = "5rem";
-              document.getElementById("ui").style.marginTop = "50px";
-              document.getElementById("restart").style.opacity = 1;
-             }
              
              // Meteor has made contact with bullet
              document.querySelectorAll("div#bullets img").forEach(bullet => {
@@ -159,15 +154,25 @@
                meteor.parentElement.removeChild(meteor);
                
                // Explosion
-               document.getElementById("effects").innerHTML += `<img src='resources/boom.png' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
+               document.getElementById("effects").innerHTML += `<img src='resources/boom.svg' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
               }
-              
-              
              });
+             
+             // Meteor has made contact with player
+             if (Math.pow(position[0] - rect.left - rect.width / 2, 2) + Math.pow(position[1] - rect.bottom + rect.width / 2, 2) < 8000) {
+              // Game over
+              document.body.style.webkitAnimationPlayState = 'paused';
+              alive = false;
+              
+              document.getElementById("ui").style.fontSize = "5rem";
+              document.getElementById("ui").style.marginTop = "50px";
+              document.getElementById("restart").style.opacity = 1;
+             }
+             
             });
             
             if (Math.random() < score / 5000 && document.querySelectorAll("div#meteors img").length < 20) {
-             document.getElementById("meteors").innerHTML += `<img src='resources/meteor.png' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
+             document.getElementById("meteors").innerHTML += `<img src='resources/meteor.svg' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
             }
             
             if (alive) {
@@ -182,6 +187,7 @@
             
             score = 0;
             alive = true;
+            
             document.body.style.webkitAnimationPlayState = 'running';
             document.getElementById("ui").style.fontSize = "2rem";
             document.getElementById("ui").style.marginTop = "0px";
