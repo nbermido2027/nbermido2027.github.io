@@ -34,12 +34,10 @@
             opacity: 0;
         } div#bullets img {
             position: absolute;
-            z-index: 0;
             width: 2.5%;
         } div#meteors img {
             position: absolute;
             width: 5%;
-            z-index: 0;
         } h1#score {
             z-index: 1;
             transition: font-size 1s, margin-top 1s;
@@ -47,10 +45,10 @@
             font-family: unitblock;
             font-size: 3rem;
             margin-top: 0;
-            z-index: 1;
         } p#highscore {
             margin-top: 0;
             font-family: unitblock;
+            z-index: 1;
             font-size: 1.2rem;
         } button {
             transition: opacity 1s;
@@ -129,7 +127,7 @@
             if (alive) {
                 bgmusic.play();
                 if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && Math.pow(event.pageX - position[0], 2) + Math.pow(event.pageY - position[1], 2) < 8000) {
-                    document.getElementById("bullets").innerHTML += `<img alt="Missile" src="resources/rocket.svg" style="top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)">`;
+                    document.getElementById("bullets").innerHTML += `<img alt="Missile" src="resources/rocket.svg" style="z-index: 0; top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)">`;
                 }
             }
         });
@@ -192,7 +190,7 @@
                     new Audio("resources/video-game-hit-noise-001-135821.mp3").play();
                          
                     // Explosion
-                    document.getElementById("effects").innerHTML += `<img alt="Explosion" src="resources/boom.svg" style="transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;">`;
+                    document.getElementById("effects").innerHTML += `<img alt="Explosion" src="resources/boom.svg" style="z-index: 0; transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;">`;
                     
                     }
                 });
@@ -213,7 +211,7 @@
             });
             
             if (Math.random() < score / 5000 && document.querySelectorAll("div#meteors img").length < 20) {
-                document.getElementById("meteors").innerHTML += `<img alt="Meteor" src="resources/meteor.svg" style="top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;">`;
+                document.getElementById("meteors").innerHTML += `<img alt="Meteor" src="resources/meteor.svg" style="z-index: 0; top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;">`;
             }
             
             if (alive) {
