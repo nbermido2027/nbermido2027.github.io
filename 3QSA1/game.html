@@ -100,6 +100,10 @@
         
         var score = 0;
         var highscore = parseInt(localStorage.getItem("highscore"));
+        if (isNaN(highscore)) {
+            highscore = 0;
+        }
+        
         document.getElementById("highscore").textContent = `HIGHSCORE: ${highscore}`;
         
         const bgmusic = new Audio("resources/A CYBER'S WORLD.mp3");
