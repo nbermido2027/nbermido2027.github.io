@@ -9,17 +9,21 @@
             0% {
                 background-position: center 0px;
             } 100% {
-                background-position: center 240px;
+                background-position: center 288px;
             }
+        }
+        
+        @font-face {
+            font-family: unitblock;
+            src: url("resources/Unitblock-mLAwm.ttf");
         }
         
         body {
             overflow: hidden;
-            font-family: bahnschrift;
             text-align: center;
             background-image: url("resources/grid.svg");
             background-position: center 0px;
-            animation: 2s linear 0s slide infinite;
+            animation: 3s linear 0s slide infinite;
         } img {
             user-select: none;
         } img#player {
@@ -36,12 +40,18 @@
             position: absolute;
             width: 5%;
             z-index: 0;
-        } h1#ui {
+        } h1#score {
             z-index: 1;
             transition: font-size 1s, margin-top 1s;
             margin-bottom: 0;
+            font-family: unitblock;
+            font-size: 3rem;
             margin-top: 0;
             z-index: 1;
+        } p#highscore {
+            margin-top: 0;
+            font-family: unitblock;
+            font-size: 1.2rem;
         } button {
             transition: opacity 1s;
             margin-top: 0;
@@ -50,10 +60,14 @@
             font-size: 2rem;
             opacity: 0;
             border-radius: 10px;
-            border: solid 4px black;
+            outline: solid 4px black;
             z-index: 1;
+            border-bottom: solid 4px #999999;
+            border-top: none;
         } button:active {
             background-color: #ececec;
+            border-top: solid 4px #999999;
+            border-bottom: none;
         } @media only screen and (max-width: 600px) {
             img#player {
                 width: 30%;
@@ -75,7 +89,8 @@
     
     <div id="effects"></div>
     
-    <h1 id="ui">SCORE: 0</h1>
+    <h1 id="score">SCORE: 0</h1>
+    <p id="highscore">HIGHSCORE: 0</p>
     <button id="restart">REPLAY</button>
     
     <script>
@@ -84,6 +99,11 @@
         var alive = true;
         
         var score = 0;
+        var highscore = parseInt(localStorage.getItem("highscore"));
+        document.getElementById("highscore").textContent = `HIGHSCORE: ${highscore}`;
+        
+        const bgmusic = new Audio("resources/A CYBER'S WORLD.mp3");
+        bgmusic.loop = true;
 
         document.addEventListener("mousemove", event => {
             player.style.opacity = 1;
@@ -92,6 +112,7 @@
                 player.style.left = `${event.pageX}px`;
  
                 movement = event.pageX - position[0];
+                
                 if (movement > 90) movement = 90;
                 else if (movement < -90) movement = -90;
                 player.style.transform = `translate(-50%, -50%) rotate(${movement}deg)`;
@@ -101,8 +122,11 @@
         });
 
         document.addEventListener("click", event => {
-            if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && alive && Math.pow(event.pageX - position[0], 2) + Math.pow(event.pageY - position[1], 2) < 8000) {
-                document.getElementById("bullets").innerHTML += `<img alt='Missile' src='resources/rocket.svg' style='top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)'>`;
+            if (alive) {
+                bgmusic.play();
+                if (document.querySelectorAll("div#bullets img").length + document.querySelectorAll("div#effects img").length < 3 && Math.pow(event.pageX - position[0], 2) + Math.pow(event.pageY - position[1], 2) < 8000) {
+                    document.getElementById("bullets").innerHTML += `<img alt="Missile" src="resources/rocket.svg" style="top: ${event.pageY + 10 - Math.random() * 20}px; left: ${event.pageX + 10 - Math.random() * 20}px; transform: translate(-50%, -50%) rotate(${movement + 20 -  Math.random() * 40}deg)">`;
+                }
             }
         });
         
@@ -112,7 +136,14 @@
         
         function run() {
             score += 0.1;
-            document.getElementById("ui").textContent = `SCORE: ${Math.round(score)}`;
+            
+            if (score > highscore) {
+             highscore = Math.round(score);
+             localStorage.setItem("highscore", highscore);
+             document.getElementById("highscore").textContent = `HIGHSCORE: ${highscore}`;
+            }
+            
+            document.getElementById("score").textContent = `SCORE: ${Math.round(score)}`;
             
             document.querySelectorAll("div#bullets img").forEach(bullet => {
                 let angle = parseFloat(bullet.style.transform.slice(29, -4));
@@ -152,9 +183,12 @@
                     // Destroy bullet & meteor
                     bullet.parentElement.removeChild(bullet);
                     meteor.parentElement.removeChild(meteor); 
-                  
+                                 
+                    // Sound effect
+                    new Audio("resources/video-game-hit-noise-001-135821.mp3").play();
+                         
                     // Explosion
-                    document.getElementById("effects").innerHTML += `<img alt='Explosion' src='resources/boom.svg' style='transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;'>`;
+                    document.getElementById("effects").innerHTML += `<img alt="Explosion" src="resources/boom.svg" style="transform: translate(-50%, -50%); opacity: 1; position: absolute; top: ${brect.top}px; left: ${brect.left}px;">`;
                     
                     }
                 });
@@ -164,15 +198,18 @@
                     // Game over
                     alive = false;
               
-                    document.body.style.webkitAnimationPlayState = 'paused';
-                    document.getElementById("ui").style.fontSize = "5rem";
-                    document.getElementById("ui").style.marginTop = "50px";
+                    document.body.style.webkitAnimationPlayState = "paused";
+                    document.getElementById("score").style.fontSize = "6rem";
+                    document.getElementById("score").style.marginTop = "50px";
                     document.getElementById("restart").style.opacity = 1;
+                    
+                    bgmusic.pause();
+                    new Audio("resources/record_scratch-108233.mp3").play();
                 }
             });
             
             if (Math.random() < score / 5000 && document.querySelectorAll("div#meteors img").length < 20) {
-                document.getElementById("meteors").innerHTML += `<img alt='Meteor' src='resources/meteor.svg' style='top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;'>`;
+                document.getElementById("meteors").innerHTML += `<img alt="Meteor" src="resources/meteor.svg" style="top: -200px; left: ${Math.random() * (window.innerWidth - 100) + 50}px;">`;
             }
             
             if (alive) {
@@ -185,14 +222,15 @@
                 score = 0;
                 alive = true;
             
-                document.body.style.webkitAnimationPlayState = 'running';
-                document.getElementById("ui").style.fontSize = "2rem";
-                document.getElementById("ui").style.marginTop = "0px";
+                document.body.style.webkitAnimationPlayState = "running";
+                document.getElementById("score").style.fontSize = "3rem";
+                document.getElementById("score").style.marginTop = "0px";
                 document.getElementById("meteors").innerHTML = "";
                 document.getElementById("bullets").innerHTML = "";
                 document.getElementById("effects").innerHTML = "";
                 document.getElementById("restart").style.opacity = 0;
                 window.requestAnimationFrame(run);
+                bgmusic.play();
             }
         });
         
