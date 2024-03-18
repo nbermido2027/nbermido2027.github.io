@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asteroids</title>
+    <title>Spaceshooters</title>
     <style>
         @keyframes slide {
             0% {
@@ -69,6 +69,12 @@
             background-color: #ececec;
             border-top: solid 4px #999999;
             border-bottom: none;
+        } img#back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            z-index: 2;
         } @media only screen and (max-width: 600px) {
             img#player {
                 width: 30%;
@@ -83,6 +89,8 @@
     </style>
 </head>
 <body>
+    <img alt="Back button" src="resources/back.svg" id="back">
+    
     <div id="bullets"></div>
     <div id="meteors"></div>
     
@@ -237,6 +245,10 @@
                 window.requestAnimationFrame(run);
                 bgmusic.play();
             }
+        });
+        
+        document.getElementById("back").addEventListener("click", (event) => {
+            window.location.replace("index.html");
         });
         
         window.onload = run;

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaceshooters</title>
+    <style>
+        @keyframes bounce {
+            0% {
+                top: 0px;
+            } 50% {
+                top: -30px;
+            } 100% {
+                top: 0px;
+            }
+        }
+        
+        @font-face {
+            font-family: unitblock;
+            src: url("resources/Unitblock-mLAwm.ttf");
+        }
+        
+        body {
+            overflow: hidden;
+            text-align: center;
+            background-image: url("resources/grid.svg");
+            font-family: unitblock;
+        } h1 {
+            font-size: 6rem;
+            text-shadow: 0px 2px 2px black;
+            margin-bottom: 0;
+        } p {
+            margin-top: 0;
+            font-size: 4rem;
+        } a {
+            padding: 10px 30px;
+            background-color: white;
+            font-size: 3rem;
+            border-radius: 10px;
+            outline: solid 4px black;
+            border-bottom: solid 4px #999999;
+            color: black;
+            text-decoration: none;
+            border-top: none;
+            margin: 20px;
+            transition: background-color 0.5s, color 0.5s, border-bottom 0.5s;
+        } a:hover {
+            background-color: #ff2a2a;
+            border-bottom: solid 4px #cc0000;
+            color: white;
+        } img#rocket {
+            width: 10%;
+            position: relative;
+            animation: 3s ease 0s bounce infinite;
+            margin-top: 30px;
+        } img#crosshair {
+            width: 10%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s;
+            z-index: -1;
+            opacity: 0;
+        } @media only screen and (max-width: 600px) {
+        }
+    </style>
+</head>
+<body>
+    <img alt="Crosshair" src="resources/crosshair.svg" id="crosshair" draggable="false">
+    
+    <img alt="Spaceship" src="resources/ship.png" id="rocket">
+    <h1>Space Shooters</h1>
+    <p>BANG BANG</p>
+    
+    <a href="game.html">Play now</a>
+    <a href="about.html">About us</a>
+    
+    <script>
+        var crosshair = document.getElementById("crosshair");
+        document.addEventListener("mousemove", (event) => {
+            crosshair.style.top = `${event.pageY}px`;
+            crosshair.style.left = `${event.pageX}px`;
+            crosshair.style.opacity = 1;
+            
+            document.body.style.backgroundPosition = `${-0.1*event.pageX}px ${-0.1*event.pageY}px`;
+        });
+        
+        document.addEventListener("mouseout", (event) => {
+            crosshair.style.opacity = 0;
+        });
+    </script>
+</body>
+</html>
