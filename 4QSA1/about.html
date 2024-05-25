@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap');
+
+        body {
+            font-family: 'League Spartan', sans-serif;
+            margin: 20px;
+            background-color: #ebe1d0;
+        }@font-face {
+    font-family: sackers-gothic;
+    src: url("resources/fonts/sackersgothicstd-heavy.otf");
+   }
+        
+        div#navbar {
+    color: #fff8ef;
+    background-color: #493939;
+    width: 100%;
+    position: absolute;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    top: 0;
+    left: 0;
+   }
+   
+   img#home {
+    position: absolute;
+    font-size: 4rem;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+   }
+
+        .content {
+            max-width: 1200px;
+            margin: 60px auto;
+        }
+
+        #head {
+            font-size: 45px;
+            text-align: left;
+            letter-spacing: 2px;
+        }
+
+        #desc {
+            font-size: 17px;
+            margin-top: 60px;
+            margin-left: 50px; 
+        }
+
+        .developers {
+            display: flex;
+            justify-content: space-around;
+            margin: 70px 0 20px 0;
+            gap: 40px;
+        }
+
+        .developer {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 30%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .developer img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+        }
+
+        .developer h2 {
+            font-size: 25px;
+            margin: 30px 0 4px 0;
+            text-align: center;
+        }
+
+        .developer h3 {
+            font-size: 20px;
+            color: gray;
+            text-align: center;
+            margin: 0;
+        }
+        h1#title {
+    font-family: sackers-gothic;
+    display: inline-block;
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-shadow: #000000 0 0 2px;
+   }
+    </style>
+</head>
+<body>
+   <div id="navbar">
+   <a href="index.html"><img src="resources/imgs/home.png" alt="CLICK TO GO BACK HOME" id="home"></a>
+   <h1 id="title">ETOILE CHIC</h1>
+  </div>
+  
+    <div class="content">
+        <h1 id="head">About the Developers</h1>
+
+        <div class="developers">
+            <div class="developer">
+                <img src="resources/imgs/joaqs.png" alt="joaqs" id="joaqs">
+                <h2 class="name">Joaquin Bermido</h2>
+                <h3 class="contri">Main Coder</h3>
+            </div>
+            <div class="developer">
+                <img src="resources/imgs/gian.jpg" alt="gian" id="gian">
+                <h2 class="name">Gian Ramirez</h2>
+                <h3 class="contri">Layouts and Design</h3>
+            </div>
+            <div class="developer">
+                <img src="resources/imgs/444759924_3789900964577476_2641678553246354053_n.jpg" alt="angeline" id="angeline">
+                <h2 class="name">Angeline Sula</h2>
+                <h3 class="contri">Product Designer</h3>
+            </div>
+        </div>
+        <p id="desc">Etoile Chic, where the sun, sea, and style meet! We're your go-to destination for beach-inspired elegance, offering a curated collection of earrings, hair accessories, skincare essentials, and jewelry. Each piece is thoughtfully designed to capture the carefree spirit of the coast, perfect for adding a touch of seaside charm to your everyday look. Dive into our world of beachy bliss and let the waves of style wash over you.</p>
+    </div>
+</body>
+</html>
+
+

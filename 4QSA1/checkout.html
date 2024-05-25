@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>ETOILE CHIC</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Seaside Glamour, Beauty Essentials">
+  <link rel="icon" href="resources/imgs/logo.png">
+  <style>
+   @font-face {
+    font-family: sackers-gothic;
+    src: url("resources/fonts/sackersgothicstd-heavy.otf");
+   }
+   
+   @font-face {
+    font-family: the-seasons;
+    src: url("resources/fonts/Fontspring-DEMO-theseasons-bd.otf");
+   }
+   
+   @font-face {
+    font-family: montserrat;
+    src: url("resources/fonts/Montserrat-Bold.ttf");
+   }
+   
+   @keyframes fall {
+    from {
+     background-position: center 0px;
+    } to {
+     background-position: center 60px;
+    }
+   }
+   
+   body {
+    background-image: url("resources/imgs/polkadot.png");
+    animation: fall 1s infinite linear;
+    text-align: center;
+    padding-top: 120px;
+    font-family: the-seasons;
+   }
+   
+   h1#title {
+    font-family: sackers-gothic;
+    display: inline-block;
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-shadow: #000000 0 0 2px;
+   }
+   
+   div#navbar {
+    color: #fff8ef;
+    background-color: #493939;
+    width: 100%;
+    position: absolute;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    top: 0;
+    left: 0;
+   }
+   
+   img#menu {
+    position: absolute;
+    font-size: 4rem;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+   }
+   
+   div#dropbar {
+    width: 100%;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    transition: opacity 0.4s;
+   }
+   
+   div#dropbar * {
+    display: inline-block;
+    font-size: 2rem;
+    color: #fff8ef;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    background-color: #493939;
+    box-shadow: #696969 0px 2px 5px;
+    font-family: montserrat;
+    text-decoration: none;
+    transition: transform 0.2s;
+    border: solid 4px #614b4b;
+   }
+   
+   div#dropbar *:hover {
+    transform: scale(1.2);
+   }
+   
+   h1#subtitle {
+    text-align: right;
+    font-size: 6rem;
+    margin-bottom: 0;
+   }
+   
+   div.content {
+    display: inline-block;
+    color: #141312;
+    width: 40%;
+    background-color: #fffcf8;
+    padding: 50px;
+    font-family: the-seasons;
+    border-radius: 60px;
+    text-align: left;
+    font-size: 1.2rem;
+    position: relative;
+    margin: 20px;
+    vertical-align: top;
+    box-shadow: #fffcf8 0 0 10px 5px;
+   }
+   
+   div.content p {
+    text-indent: 1em;
+   }
+   
+   div#cart div.item {
+    background-color: #493939;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+   }
+   
+   div.item img {
+    width: 32px;
+    vertical-align: middle;
+   }
+   
+   div.item p {
+    display: inline-block;
+    font-family: montserrat;
+    color: #fffcf8;
+    vertical-align: middle;
+   }
+
+   img#shell {
+    width: 30%;
+    position: absolute;
+    top: 70%;
+    left: -5%;
+   }
+   
+   img#starfish {
+    width: 35%;
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    transform: rotate(100deg);
+   }
+   
+   img#clamshell {
+    width: 20%;
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    transform: rotate(40deg);
+   }
+   
+   img#conch {
+    position: absolute;
+    right: 0;
+    top: 75%;
+    transform: rotateY(180deg) rotate(60deg);
+   }
+   
+   h1.label {
+    margin-top: 240px;
+    font-family: the-seasons;
+    font-size: 6rem;
+    margin-bottom: 0;
+   }
+   
+   p#totalprice {
+    font-family: montserrat;
+    margin-top: 0;
+    margin-bottom: 100px;
+    text-align: right;
+   }
+   
+   form input {
+    width: 100%;
+    margin-bottom: 20px;
+    border: solid #493939 2px;
+    border-radius: 15px;
+    height: 50px;
+   }
+   
+   form {
+    padding-bottom: 40px;
+    border-bottom: solid #493939 3px;
+    margin-bottom: 40px;
+   }
+   
+   img#home {
+    position: absolute;
+    font-size: 4rem;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+   }
+   
+   form label {
+    font-size: 1.6rem;
+   }
+   
+   input#orderbutton {
+    width: 30%;
+    font-family: montserrat;
+    color: #fffcf8;
+    background-color: #493939;
+    font-size: 1.2rem;
+    margin-left: 35%;
+   }
+   
+   @media (max-width: 1000px) {
+    body {
+     padding-top: 320px;
+    }
+    
+    div.content {
+     width: 80%;
+    }
+    
+    img#clamshell {
+     transform: rotate(20deg);
+     left: 5%;
+    }
+    
+    img#starfish {
+     width: 35%;
+     right: 3%;
+     transform: rotate(120deg);
+     top: 70%;
+    }
+    
+    img#shell {
+     width: 50%;
+     top: 75%;
+     left: -10%;
+    }
+    
+    img#conch {
+     width: 50%;
+     top: 85%;
+     transform: rotate(80deg);
+     right: -7%;
+    }
+   }
+   
+  </style>
+ </head>
+ <body> 
+  <div id="navbar">
+   <a href="index.html"><img src="resources/imgs/home.png" alt="CLICK TO GO BACK HOME" id="home"></a>
+   <h1 id="title">ETOILE CHIC</h1>
+  </div>
+  
+  <div class="content" id="cart">
+   <img src="resources/imgs/clam.png" alt="" id="clamshell">
+   <img src="resources/imgs/starfish.png" alt="" id="starfish">
+  
+   <h1 id="subtitle">Checkout</h1>
+   <p id="totalprice"></p>
+   
+   <form method="GET" action="http://sirjm.infinityfreeapp.com/checkout.php">
+    <label for="cust_name">Name</label><br>
+    <input id="cust_name" name="cust_name" required><br>
+    
+    <label for="cust_addr">Delivery Address</label><br>
+    <input id="cust_addr" name="cust_addr" required><br>
+    
+    <label for="cust_email">Email</label><br>
+    <input id="cust_email" type="email" name="cust_email" required><br>
+    
+    <input id="cust_order" name="cust_order" style="display:none;">
+    
+    <input type="submit" value="PLACE ORDER" id="orderbutton">
+   </form>
+   
+  </div>
+  
+  <img src="resources/imgs/shell.png" alt="" id="shell">
+  <img src="resources/imgs/conch.png" alt="" id="conch">
+  
+  <script>
+   
+   var url = new URL(window.location.href);
+   var cust_order = [];
+   
+   if (url.searchParams.get("cust_order").length > 0) {
+    cust_order = JSON.parse(url.searchParams.get("cust_order"));
+   }
+   
+   document.getElementById('totalprice').textContent = 'TOTAL: $' + cust_order.map(({prod_name, prod_price}) => prod_price).reduce((sum, a) => sum + a, 0);
+   
+   cartlist = document.getElementById("cart");
+   cust_order.forEach(item => {
+    cartlist.innerHTML += `
+     <div class="item">
+      <img alt="X" src="resources/imgs/x.png" onclick="cust_order.splice(Array.from(this.parentElement.parentElement.children).indexOf(this.parentElement) - 5, 1); this.parentElement.parentElement.removeChild(this.parentElement); document.getElementById('totalprice').textContent = 'TOTAL: $' + cust_order.map(({prod_name, prod_price}) => prod_price).reduce((sum, a) => sum + a, 0);">
+      <p>${item.prod_name}&nbsp;&#183;&nbsp;$${item.prod_price}</p>
+     </div>`;
+    });
+    
+    document.getElementById("orderbutton").addEventListener("click", event => {
+     document.getElementById("cust_order").value = JSON.stringify(cust_order);
+    });
+  </script>
+ </body>
+</html>
